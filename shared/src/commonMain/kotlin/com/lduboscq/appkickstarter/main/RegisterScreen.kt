@@ -134,7 +134,7 @@ class RegisterScreen : Screen {
                     )
                 }
                 Row(
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
 
@@ -158,40 +158,17 @@ class RegisterScreen : Screen {
                         onClick = {navigator.push(ScreenRouter(AllScreens.Login))},
                         modifier = Modifier.padding(10.dp),
                         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
-
                     ) {
 
                         Text("Cancel")
                     }
+                    Button(onClick = {navigator.push(ScreenRouter(AllScreens.Administrator))}) {
+                        Text("Administrator")
+                    }
+                }
 
-                }
-                if (!userName.isNullOrEmpty()) {
-                    Button(onClick = {
-                        screenModel.getUser(
-                            userName,
-                            email,
-                            password,
-                            confirmPassword
-                        )
-                    }) {
-                        Text("Get User")
-                    }
-                    Button(onClick = { screenModel.deleteUser(userName) }) {
-                        Text("Delete")
-                    }
 
-                }
-                if (!userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty()) {
-                    Button(onClick = {
-                        screenModel.updatePassword(
-                            userName,
-                            password,
-                            confirmPassword
-                        )
-                    }) {
-                        Text("Update")
-                    }
-                }
+
 
                 if (state is RegistrationScreenModel.State.Result.SingleResult) {
                     val userData =

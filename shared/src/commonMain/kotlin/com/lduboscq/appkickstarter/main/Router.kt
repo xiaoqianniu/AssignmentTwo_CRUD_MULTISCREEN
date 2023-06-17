@@ -7,6 +7,7 @@ sealed class AllScreens {
     object Login : AllScreens()
 
     object Register : AllScreens()
+    object Administrator : AllScreens()
 
 
 }
@@ -21,6 +22,7 @@ fun ScreenRouter(screen: AllScreens): Screen {
         is AllScreens.Register ->
             RegisterScreen()
 
-
+        is AllScreens.Administrator ->
+            AdministratorScreen()
     }
 }
