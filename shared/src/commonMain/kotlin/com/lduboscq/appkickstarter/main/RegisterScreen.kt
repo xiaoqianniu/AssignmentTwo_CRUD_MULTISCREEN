@@ -40,7 +40,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
-
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 
 
 class RegisterScreen : Screen {
@@ -54,6 +55,7 @@ class RegisterScreen : Screen {
         var email by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
         var confirmPassword by remember { mutableStateOf("") }
+        val navigator = LocalNavigator.currentOrThrow
 
         Box(modifier = Modifier.fillMaxSize()) {
             com.lduboscq.appkickstarter.ui.Image(
@@ -153,7 +155,7 @@ class RegisterScreen : Screen {
                     }
 
                     Button(
-                        onClick = {},
+                        onClick = {navigator.push(ScreenRouter(AllScreens.Login))},
                         modifier = Modifier.padding(10.dp),
                         colors = ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
 
@@ -177,9 +179,6 @@ class RegisterScreen : Screen {
                     Button(onClick = { screenModel.deleteUser(userName) }) {
                         Text("Delete")
                     }
-//                Button(onClick = { screenModel.getAllWithSameUsername(userName) }) {
-//                    Text("GetAll")
-//                }
 
                 }
                 if (!userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty()) {

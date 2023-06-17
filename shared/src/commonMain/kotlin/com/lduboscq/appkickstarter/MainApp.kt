@@ -6,6 +6,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.lduboscq.appkickstarter.list.ListScreenContent
 import com.lduboscq.appkickstarter.list.PersonsListScreen
+import com.lduboscq.appkickstarter.main.LoginScreen
 import com.lduboscq.appkickstarter.main.RegisterScreen
 import com.lduboscq.appkickstarter.main.ui.theme.AppTheme
 
@@ -13,7 +14,7 @@ import com.lduboscq.appkickstarter.main.ui.theme.AppTheme
 @Composable
 public fun MainApp() {
     AppTheme {
-        Navigator(RegisterScreen()) { navigator ->
+        Navigator(LoginScreen()) { navigator ->
             SlideTransition(navigator)
         }
     }
