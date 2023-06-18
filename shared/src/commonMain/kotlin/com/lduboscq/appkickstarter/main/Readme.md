@@ -11,9 +11,7 @@ Features
 
 Screenshots
 
-![](C:\Users\niuho\Downloads\Screenshot 2023-06-18 121534.png)![](C:\Users\niuho\Downloads\Screenshot 2023-06-18 122314.png)
-![](C:\Users\niuho\Downloads\Screenshot 2023-06-18 122335.png)![](C:\Users\niuho\Downloads\Screenshot 2023-06-18 122412.png)
-
+![img.png](img.png)
 Technologies Used
 Kotlin
 Jetpack Compose
