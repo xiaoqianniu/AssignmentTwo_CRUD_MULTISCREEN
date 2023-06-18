@@ -11,4 +11,13 @@ class LoginRepositoryRealmLocal: LoginRepositoryRealm() {
             realm = Realm.open(config)
 
     }
+
+    override suspend fun getUser(
+        userName: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ): UserData? {
+        TODO("Not yet implemented")
+    }
 }

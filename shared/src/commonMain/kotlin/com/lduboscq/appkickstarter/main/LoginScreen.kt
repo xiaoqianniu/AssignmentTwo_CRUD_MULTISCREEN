@@ -116,7 +116,7 @@ class LoginScreen : Screen {
                 )
 
                 Button(
-                    onClick = {
+                    onClick = { navigator.push(ScreenRouter(AllScreens.Profile(email)))
 
                     }, modifier = Modifier.padding(10.dp),
 

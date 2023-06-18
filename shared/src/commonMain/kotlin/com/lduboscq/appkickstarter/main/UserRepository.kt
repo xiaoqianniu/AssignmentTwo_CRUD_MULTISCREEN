@@ -7,6 +7,10 @@ interface UserRepository {
         password: String,
         confirmPassword: String
     ): UserData?
+    suspend fun getUser(
+        email: String,
+        password: String,
+    ): LoginUserData?
 
     suspend fun addUser(userData: UserData): UserData?
 
@@ -15,4 +19,6 @@ interface UserRepository {
     suspend fun updateUser(userName: String,password: String,confirmPassword: String):UserData?
 
     suspend fun getAllUsers(userName: String):UserData?
+
+    suspend fun getUserName(email: String)
 }

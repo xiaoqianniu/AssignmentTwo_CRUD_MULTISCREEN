@@ -8,25 +8,23 @@ abstract class LoginRepositoryRealm : UserRepository {
 
     abstract suspend fun setupRealmSync()
 
-    suspend fun convertToUserData(user: User?): UserData? {
+    suspend fun convertToLoginUserData(user: User?): LoginUserData? {
         if (!this::realm.isInitialized) {
             setupRealmSync()
         }
 
-        var userData: UserData? = null
+        var loginUserData: LoginUserData? = null
         realm.write {
             if (user != null) {
-                userData = UserData(
+                loginUserData = LoginUserData(
                     id = user!!._id,
-                    username = user!!.username,
                     email = user!!.email,
                     password = user!!.password,
-                    confirmPassword = user!!.confirmPassword,
                     user = user,
                 )
             }
         }
-        return userData
+        return loginUserData
 
     }
 
@@ -35,16 +33,14 @@ abstract class LoginRepositoryRealm : UserRepository {
     }
 
     override suspend fun getUser(
-        userName: String,
         email: String,
         password: String,
-        confirmPassword: String
-    ): UserData? {
+    ): LoginUserData? {
         if (!this::realm.isInitialized) {
             setupRealmSync()
         }
-        val user: User? = realm.query<User>(User::class, "username = \"$userName\"").first().find()
-        return convertToUserData(user)
+        val user: User? = realm.query<User>(User::class, "email = \"$email\"").first().find()
+        return convertToLoginUserData(user)
     }
 
     override suspend fun addUser(userData: UserData): UserData? {
@@ -64,6 +60,10 @@ abstract class LoginRepositoryRealm : UserRepository {
     }
 
     override suspend fun getAllUsers(userName: String): UserData? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserName(email: String) {
         TODO("Not yet implemented")
     }
 

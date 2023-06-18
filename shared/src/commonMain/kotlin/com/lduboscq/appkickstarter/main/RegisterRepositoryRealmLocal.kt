@@ -10,7 +10,15 @@ class RegisterRepositoryRealmLocal: RegisterRepositoryRealm() {
         realm = Realm.open(config)
     }
 
+    override suspend fun getUser(email: String, password: String): LoginUserData? {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getAllUsers(userName: String): UserData? {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getUserName(email: String) {
         TODO("Not yet implemented")
     }
 }

@@ -11,3 +11,10 @@ class LoginUser: RealmObject {
     var password: String = ""
 
 }
+
+data class LoginUserData(
+    var id: String? = null,
+    var email: String = "",
+    var password: String = "",
+    var user: User?
+)

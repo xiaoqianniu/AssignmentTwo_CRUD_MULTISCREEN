@@ -147,7 +147,7 @@ class RegisterScreen : Screen {
                                 confirmPassword
                             )
                         }, modifier = Modifier.padding(10.dp),
-
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary),
                         enabled = !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty()
                     ) {
 
@@ -155,29 +155,19 @@ class RegisterScreen : Screen {
                     }
 
                     Button(
-                        onClick = {navigator.push(ScreenRouter(AllScreens.Login))},
+                        onClick = { navigator.push(ScreenRouter(AllScreens.Login)) },
                         modifier = Modifier.padding(10.dp),
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.primary)
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
                     ) {
 
                         Text("Cancel")
                     }
-                    Button(onClick = {navigator.push(ScreenRouter(AllScreens.Administrator))}) {
+                    Button(
+                        onClick = { navigator.push(ScreenRouter(AllScreens.Administrator)) },
+                        modifier = Modifier.padding(10.dp),
+                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                    ) {
                         Text("Administrator")
-                    }
-                }
-
-
-
-
-                if (state is RegistrationScreenModel.State.Result.SingleResult) {
-                    val userData =
-                        (state as RegistrationScreenModel.State.Result.SingleResult).userData
-                    Text("The results of the action are:")
-                    if (userData != null) {
-                        UserCard(userData = userData)
-                    } else {
-                        Text("No user data available.")
                     }
                 }
             }
