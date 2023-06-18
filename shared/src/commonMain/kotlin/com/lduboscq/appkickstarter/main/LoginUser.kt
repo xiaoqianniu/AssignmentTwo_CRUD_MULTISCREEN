@@ -3,7 +3,9 @@ package com.lduboscq.appkickstarter.main
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.RealmUUID
 import io.realm.kotlin.types.annotations.PrimaryKey
-
+/**
+ * Represents a login user stored in Realm.
+ */
 class LoginUser: RealmObject {
     @PrimaryKey
     var _id: String = RealmUUID.random().toString()
@@ -11,7 +13,14 @@ class LoginUser: RealmObject {
     var password: String = ""
 
 }
-
+/**
+ * Represents login user data.
+ *
+ * @param id The ID of the user.
+ * @param email The email address of the user.
+ * @param password The password of the user.
+ * @param user The user associated with the login data.
+ */
 data class LoginUserData(
     var id: String? = null,
     var email: String = "",

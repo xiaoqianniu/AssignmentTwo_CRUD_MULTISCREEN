@@ -29,6 +29,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 
+/**
+* UserCard for displaying the users' information in AdministratorScreen,
+ * it includes text, textFields to update password
+* */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun UserCard(userData: UserData?,model: AdministratorScreenModel) {
@@ -50,6 +55,7 @@ fun UserCard(userData: UserData?,model: AdministratorScreenModel) {
         ) {
             Column(modifier = Modifier.weight(1f)) {
                 if (userData != null) {
+                    // Display user data
                     Text(
                         text = "Username: ${userData.username}",
                         style = MaterialTheme.typography.h6,
@@ -62,6 +68,7 @@ fun UserCard(userData: UserData?,model: AdministratorScreenModel) {
                     Text(text = "Confirm Password: ${userData.confirmPassword}")
 
                     if (isEditing) {
+                        // User is in editing mode
                         Spacer(modifier = Modifier.height(16.dp))
                         TextField(
                             value = newPassword,
@@ -107,6 +114,7 @@ fun UserCard(userData: UserData?,model: AdministratorScreenModel) {
 
 
             if (!isEditing) {
+                // Show edit button when not in editing mode
                 IconButton(
                     onClick = { isEditing = true },
                     modifier = Modifier.padding(start = 8.dp)

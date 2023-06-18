@@ -36,7 +36,10 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.lduboscq.appkickstarter.ui.Image
-
+// Renders the user interface for the administrator screen
+// and manages the state using the AdministratorScreenModel.
+// Handles user interactions and updates the UI based on the state.
+// Performs CRUD operations on user data and displays the results.
 class AdministratorScreen : Screen {
 
     @Composable
@@ -51,7 +54,7 @@ class AdministratorScreen : Screen {
         var password by remember { mutableStateOf("") }
         var confirmPassword by remember { mutableStateOf("") }
 
-
+        // The main content of the screen wrapped in a Box
         Box(modifier = Modifier.fillMaxSize()) {
             Scaffold(
                 bottomBar = { MyBottomBar() }

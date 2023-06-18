@@ -18,6 +18,8 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
             class MultipleResult(val userDatas: List<UserData>?) : Result()
         }
     }
+
+    // Function to get user
     fun getUser(userName: String, email: String, password: String, confirmPassword: String) {
         coroutineScope.launch {
             mutableState.value = AdministratorScreenModel.State.Loading
@@ -33,6 +35,7 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
 
     }
 
+    // Function to delete a user
     fun deleteUser(userName: String) {
         coroutineScope.launch {
             mutableState.value = AdministratorScreenModel.State.Loading
@@ -43,6 +46,7 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
         }
     }
 
+    // Function to update password
     fun updatePassword(userName: String, password: String, confirmPassword: String) {
         coroutineScope.launch {
             mutableState.value = AdministratorScreenModel.State.Loading
@@ -57,6 +61,7 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
         }
     }
 
+    // Function to get all users
     fun getAll(){
         coroutineScope.launch {
             mutableState.value = AdministratorScreenModel.State.Loading

@@ -1,13 +1,17 @@
 package com.lduboscq.appkickstarter.main
 
 import io.realm.kotlin.Realm
-
+/**
+ * An abstract base class for the login repository using Realm.
+ */
 abstract class LoginRepositoryRealm : UserRepository {
 
     lateinit var realm: Realm
 
     abstract suspend fun setupRealmSync()
-
+    /**
+     * Converts a User object to LoginUserData.
+     */
     suspend fun convertToLoginUserData(user: User?): LoginUserData? {
         if (!this::realm.isInitialized) {
             setupRealmSync()
@@ -27,7 +31,9 @@ abstract class LoginRepositoryRealm : UserRepository {
         return loginUserData
 
     }
-
+    /**
+     * Closes the Realm instance.
+     */
     private fun closeRealmSync() {
         realm.close()
     }

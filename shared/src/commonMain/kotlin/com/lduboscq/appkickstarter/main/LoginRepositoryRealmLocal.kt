@@ -2,7 +2,9 @@ package com.lduboscq.appkickstarter.main
 
 import io.realm.kotlin.Realm
 import io.realm.kotlin.RealmConfiguration
-
+/**
+ * A local implementation of the login repository using Realm.
+ */
 class LoginRepositoryRealmLocal: LoginRepositoryRealm() {
     override suspend fun setupRealmSync() {
 

@@ -27,25 +27,43 @@ fun MyBottomBar() {
         modifier = Modifier.fillMaxWidth(),
         backgroundColor = MaterialTheme.colors.secondary
     ) {
-
+        // "Login" button
         TextButton(onClick = {
             navigator.push(ScreenRouter(AllScreens.Login))
         }) {
-            Text(text = "Login",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+            Text(
+                text = "Login",
+                modifier = Modifier.padding(horizontal = 15.dp),
+                fontSize = 20.sp,
+                fontStyle = FontStyle.Normal
+            )
         }
 
         Spacer(modifier = Modifier.width(15.dp))
 
+       // "Register" button
         TextButton(onClick = {
             navigator.push(ScreenRouter(AllScreens.Register))
         }) {
-            Text(text = "Register",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+            Text(
+                text = "Register",
+                modifier = Modifier.padding(horizontal = 15.dp),
+                fontSize = 20.sp,
+                fontStyle = FontStyle.Normal
+            )
         }
         Spacer(modifier = Modifier.width(15.dp))
+
+        // "Profile" button
         TextButton(onClick = {
             navigator.push(ScreenRouter(AllScreens.Profile(email = null)))
         }) {
-            Text(text = "Profile",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+            Text(
+                text = "Profile",
+                modifier = Modifier.padding(horizontal = 15.dp),
+                fontSize = 20.sp,
+                fontStyle = FontStyle.Normal
+            )
         }
 
     }

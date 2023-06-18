@@ -39,6 +39,10 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.lduboscq.appkickstarter.ui.Image
 
+
+/**
+ * Represents the login screen.
+ */
 class LoginScreen : Screen {
 
     @Composable
@@ -131,7 +135,12 @@ class LoginScreen : Screen {
     }
 }
 
-
+/**
+ * Changes the color based on whether the button is clicked or not.
+ *
+ * @param isClicked Determines whether the button is clicked or not.
+ * @return The color to be used for the text.
+ */
 @Composable
 fun colorChangeByClick(isClicked: Boolean): Color {
 

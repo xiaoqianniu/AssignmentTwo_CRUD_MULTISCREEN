@@ -43,9 +43,15 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 
-
+/**
+ * Screen class representing the user registration screen.
+ */
 class RegisterScreen : Screen {
-
+    /**
+     * Composable function that displays the content of the registration screen.
+     * It includes input fields for username, email, password, and confirm password,
+     * along with buttons for submitting the registration, canceling, and navigating to the administrator screen.
+     */
     @Composable
     override fun Content() {
         val screenModel =
