@@ -14,11 +14,4 @@ class RegisterRepositoryRealmLocal: RegisterRepositoryRealm() {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllUsers(userName: String): UserData? {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getUserName(email: String) {
-        TODO("Not yet implemented")
-    }
 }

@@ -70,6 +70,8 @@ kotlin {
                 api("cafe.adriel.voyager:voyager-transitions:$voyagerVersion")
                 implementation("cafe.adriel.voyager:voyager-koin:$voyagerVersion")
                 implementation("io.realm.kotlin:library-sync:1.9.1")
+
+
             }
         }
         val androidMain by getting {
@@ -116,6 +118,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+}
+dependencies {
+    implementation("androidx.appcompat:appcompat:1.6.1")
+
 }
 
 multiplatformResources {

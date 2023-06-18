@@ -59,12 +59,9 @@ abstract class LoginRepositoryRealm : UserRepository {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAllUsers(userName: String): UserData? {
+    override suspend fun getAllUsers(): List<UserData> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getUserName(email: String) {
-        TODO("Not yet implemented")
-    }
 
 }

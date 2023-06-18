@@ -1,9 +1,11 @@
 package com.lduboscq.appkickstarter.main
 
 import io.realm.kotlin.Realm
+import io.realm.kotlin.ext.query
+import io.realm.kotlin.query.RealmResults
 import io.realm.kotlin.types.RealmUUID
 
-abstract class RegisterRepositoryRealm:UserRepository {
+abstract class RegisterRepositoryRealm : UserRepository {
 
     lateinit var realm: Realm
 
@@ -66,7 +68,11 @@ abstract class RegisterRepositoryRealm:UserRepository {
         return convertToUserData(newUser)
     }
 
-    override suspend fun updateUser(userName: String,password: String,confirmPassword: String): UserData? {
+    override suspend fun updateUser(
+        userName: String,
+        password: String,
+        confirmPassword: String
+    ): UserData? {
         if (!this::realm.isInitialized) {
             setupRealmSync()
         }
@@ -89,6 +95,7 @@ abstract class RegisterRepositoryRealm:UserRepository {
         }
         return userData
     }
+
     override suspend fun deleteOneUser(userName: String): UserData? {
         if (!this::realm.isInitialized) {
             setupRealmSync()
@@ -119,5 +126,15 @@ abstract class RegisterRepositoryRealm:UserRepository {
         return user2
 
     }
+
+
+    override suspend fun getAllUsers(): List<UserData> {
+        if (!this::realm.isInitialized) {
+            setupRealmSync()
+        }
+
+        return realm.query<User>(User::class).find().mapNotNull { convertToUserData(it) }
+    }
+
 
 }

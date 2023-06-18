@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
@@ -96,7 +98,7 @@ class AdministratorScreen : Screen {
                         },
                             modifier = Modifier.padding(10.dp),
                             colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
-                            Text("Get User")
+                            Text("GetOne")
                         }
 
                         Button(
@@ -118,16 +120,32 @@ class AdministratorScreen : Screen {
                             Text("Update")
                         }
 
-
-                        if (state is AdministratorScreenModel.State.Result.SingleResult) {
-                            val userData =
-                                (state as AdministratorScreenModel.State.Result.SingleResult).userData
-                            Text("The results of the action are:")
-                            if (userData != null) {
-                                UserCard(userData = userData)
-                            } else {
-                                Text("No user data available.")
+                        Button(onClick = {
+                            screenModel.getAll()
+                        }, modifier = Modifier.padding(10.dp),
+                            colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
+                            Text("getAll")
+                        }
+                    }
+                    if (state is AdministratorScreenModel.State.Result.SingleResult) {
+                        val userData = (state as AdministratorScreenModel.State.Result.SingleResult).userData
+                        Text("The result of the action is:")
+                        if (userData != null) {
+                            UserCard(userData = userData)
+                        } else {
+                            Text("No user data available.")
+                        }
+                    } else if (state is AdministratorScreenModel.State.Result.MultipleResult) {
+                        val listUserData = (state as AdministratorScreenModel.State.Result.MultipleResult).userDatas
+                        Text("The results of the action are:")
+                        if (listUserData != null) {
+                            LazyColumn {
+                                items(listUserData) { userData ->
+                                    UserCard(userData = userData)
+                                }
                             }
+                        } else {
+                            Text("No user data available.")
                         }
                     }
 

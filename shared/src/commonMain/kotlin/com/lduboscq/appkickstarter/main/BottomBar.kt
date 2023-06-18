@@ -10,6 +10,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontStyle
@@ -27,25 +28,25 @@ fun MyBottomBar() {
         backgroundColor = MaterialTheme.colors.secondary
     ) {
 
-        Text(
-            "Login", modifier = Modifier.clickable(onClick = {
-                navigator.push(ScreenRouter(AllScreens.Login))
-            }).padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal
-        )
+        TextButton(onClick = {
+            navigator.push(ScreenRouter(AllScreens.Login))
+        }) {
+            Text(text = "Login",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+        }
 
         Spacer(modifier = Modifier.width(15.dp))
 
-        Text(
-            "Register", modifier = Modifier.clickable(onClick = {
-                navigator.push(ScreenRouter(AllScreens.Register))
-            }), fontSize = 20.sp, fontStyle = FontStyle.Normal
-        )
+        TextButton(onClick = {
+            navigator.push(ScreenRouter(AllScreens.Register))
+        }) {
+            Text(text = "Register",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+        }
         Spacer(modifier = Modifier.width(15.dp))
-        Text(
-            "Profile", modifier = Modifier.clickable(onClick = {
-                navigator.push(ScreenRouter(AllScreens.Profile(email = null)))
-            }).padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal
-        )
+        TextButton(onClick = {
+            navigator.push(ScreenRouter(AllScreens.Profile(email = null)))
+        }) {
+            Text(text = "Profile",modifier = Modifier.padding(horizontal = 15.dp), fontSize = 20.sp, fontStyle = FontStyle.Normal)
+        }
 
     }
 }

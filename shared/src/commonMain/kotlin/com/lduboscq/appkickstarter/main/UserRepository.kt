@@ -18,7 +18,6 @@ interface UserRepository {
 
     suspend fun updateUser(userName: String,password: String,confirmPassword: String):UserData?
 
-    suspend fun getAllUsers(userName: String):UserData?
+    suspend fun getAllUsers():List<UserData>?
 
-    suspend fun getUserName(email: String)
 }

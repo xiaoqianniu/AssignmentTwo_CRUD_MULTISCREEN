@@ -15,7 +15,7 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
         object Loading : State()
         sealed class Result : State() {
             class SingleResult(val userData: UserData?) : Result()
-            class MultipleResult(val userDatas: Flow<UserData>?) : Result()
+            class MultipleResult(val userDatas: List<UserData>?) : Result()
         }
     }
     fun getUser(userName: String, email: String, password: String, confirmPassword: String) {
@@ -53,6 +53,15 @@ class AdministratorScreenModel(private val repository: RegisterRepositoryRealm) 
                     password,
                     confirmPassword
                 )
+            )
+        }
+    }
+
+    fun getAll(){
+        coroutineScope.launch {
+            mutableState.value = AdministratorScreenModel.State.Loading
+            mutableState.value = AdministratorScreenModel.State.Result.MultipleResult(
+                repository.getAllUsers()
             )
         }
     }
