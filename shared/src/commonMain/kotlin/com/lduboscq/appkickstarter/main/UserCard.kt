@@ -12,7 +12,11 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,7 +31,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun UserCard(userData: UserData?) {
+fun UserCard(userData: UserData?,model: AdministratorScreenModel) {
     var newPassword by remember { mutableStateOf("") }
     var confirmNewPassword by remember { mutableStateOf("") }
     var isEditing by remember { mutableStateOf(false) }
@@ -63,20 +67,25 @@ fun UserCard(userData: UserData?) {
                             value = newPassword,
                             onValueChange = { newPassword = it },
                             label = { Text("New Password") },
-                            visualTransformation = PasswordVisualTransformation()
                         )
                         Spacer(modifier = Modifier.height(8.dp))
                         TextField(
                             value = confirmNewPassword,
                             onValueChange = { confirmNewPassword = it },
                             label = { Text("Confirm New Password") },
-                            visualTransformation = PasswordVisualTransformation()
                         )
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.End
                         ) {
-                            TextButton(onClick = { /* Handle save click */ }) {
+                            TextButton(onClick = {
+                                model.updatePassword(
+                                    userData.username,
+                                    newPassword,
+                                    confirmNewPassword
+                                )
+                                isEditing = false
+                            }) {
                                 Text("Save")
                             }
                             TextButton(onClick = { isEditing = false }) {
@@ -84,6 +93,9 @@ fun UserCard(userData: UserData?) {
                             }
                         }
                     }
+
+
+
                 } else {
                     Text(
                         text = "No User result",
@@ -93,9 +105,13 @@ fun UserCard(userData: UserData?) {
                 }
             }
 
+
             if (!isEditing) {
-                TextButton(onClick = { isEditing = true }) {
-                    Text("Edit")
+                IconButton(
+                    onClick = { isEditing = true },
+                    modifier = Modifier.padding(start = 8.dp)
+                ) {
+                    Icon(Icons.Default.Edit, contentDescription = "Edit")
                 }
             }
         }

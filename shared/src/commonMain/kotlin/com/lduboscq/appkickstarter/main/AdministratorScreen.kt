@@ -110,17 +110,6 @@ class AdministratorScreen : Screen {
                         }
 
                         Button(onClick = {
-                            screenModel.updatePassword(
-                                userName,
-                                password,
-                                confirmPassword
-                            )
-                        }, modifier = Modifier.padding(10.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
-                            Text("Update")
-                        }
-
-                        Button(onClick = {
                             screenModel.getAll()
                         }, modifier = Modifier.padding(10.dp),
                             colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
@@ -131,7 +120,7 @@ class AdministratorScreen : Screen {
                         val userData = (state as AdministratorScreenModel.State.Result.SingleResult).userData
                         Text("The result of the action is:")
                         if (userData != null) {
-                            UserCard(userData = userData)
+                            UserCard(userData = userData,model = screenModel)
                         } else {
                             Text("No user data available.")
                         }
@@ -141,7 +130,7 @@ class AdministratorScreen : Screen {
                         if (listUserData != null) {
                             LazyColumn {
                                 items(listUserData) { userData ->
-                                    UserCard(userData = userData)
+                                    UserCard(userData = userData,model = screenModel)
                                 }
                             }
                         } else {
