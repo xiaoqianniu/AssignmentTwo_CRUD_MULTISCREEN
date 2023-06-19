@@ -11,6 +11,8 @@ sealed class AllScreens {
 
     data class Profile(val email: String?) : AllScreens()
 
+    object AboutUs : AllScreens()
+
 
 }
 
@@ -29,5 +31,8 @@ fun ScreenRouter(screen: AllScreens): Screen {
 
         is AllScreens.Profile ->
             ProfileScreen(screen.email?:"")
+
+        is AllScreens.AboutUs->
+           AboutUsScreen()
     }
 }

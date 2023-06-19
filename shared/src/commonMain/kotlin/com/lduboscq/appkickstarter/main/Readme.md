@@ -55,6 +55,9 @@ View your profile information, including your email address and favorite recipe 
 Edit your profile details and update your password if needed.
 Explore and interact with the displayed recipe cards.
 
+AboutUs Page
+Display the contact card and information
+
 Development
 
 To contribute to the project, follow these steps:

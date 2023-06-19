@@ -42,6 +42,7 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_dark_primary
 
 /**
  * Screen class representing the user registration screen.
@@ -152,8 +153,9 @@ class RegisterScreen : Screen {
                                 password,
                                 confirmPassword
                             )
+                            navigator.push(ScreenRouter(AllScreens.Login))
                         }, modifier = Modifier.padding(10.dp),
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary),
+                        colors = ButtonDefaults.buttonColors(md_theme_dark_primary),
                         enabled = !userName.isEmpty() && !email.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty()
                     ) {
 
@@ -163,7 +165,7 @@ class RegisterScreen : Screen {
                     Button(
                         onClick = { navigator.push(ScreenRouter(AllScreens.Login)) },
                         modifier = Modifier.padding(10.dp),
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                        colors = ButtonDefaults.buttonColors(md_theme_dark_primary)
                     ) {
 
                         Text("Cancel")
@@ -171,7 +173,7 @@ class RegisterScreen : Screen {
                     Button(
                         onClick = { navigator.push(ScreenRouter(AllScreens.Administrator)) },
                         modifier = Modifier.padding(10.dp),
-                        colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                        colors = ButtonDefaults.buttonColors(md_theme_dark_primary)
                     ) {
                         Text("Administrator")
                     }

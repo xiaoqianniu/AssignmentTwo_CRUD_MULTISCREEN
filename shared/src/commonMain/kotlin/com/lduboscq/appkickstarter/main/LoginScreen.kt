@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -37,7 +38,11 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_dark_onPrimary
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_dark_primary
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_light_secondary
 import com.lduboscq.appkickstarter.ui.Image
+import kotlinx.coroutines.runBlocking
 
 
 /**
@@ -54,6 +59,7 @@ class LoginScreen : Screen {
         var password by remember { mutableStateOf("") }
         var isClicked by remember { mutableStateOf(true) }
         val navigator = LocalNavigator.currentOrThrow
+        var errorMessage by remember { mutableStateOf("") }
 
         Box(modifier = Modifier.fillMaxSize()) {
             Image(
@@ -70,19 +76,20 @@ class LoginScreen : Screen {
                 when (val result = state) {
                     is LoginScreenModel.State.Init -> Text("...")
                     is LoginScreenModel.State.Loading -> Text("Loading")
-                    is LoginScreenModel.State.Result -> {
-                        Text("Success")
-                    }
+                    is LoginScreenModel.State.Result -> { Text("Success") }
+                    else -> {Text("Invalid email or password", color = Color.Red)}
                 }
                 Text(
                     "LoginMe",
                     color = MaterialTheme.colors.onSecondary,
-                    fontSize = 25.sp,
+                    fontSize = 30.sp,
                     style = MaterialTheme.typography.h3,
-                    modifier = Modifier.padding(top = 50.dp, bottom = 10.dp)
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(vertical = 50.dp)
                 )
 
-                Card(modifier = Modifier.padding(15.dp), elevation = 10.dp) {
+                Card( modifier = Modifier.padding(horizontal = 30.dp, vertical = 10.dp),
+                    elevation = 10.dp) {
                     TextField(
                         value = email,
                         onValueChange = { email = it },
@@ -95,7 +102,8 @@ class LoginScreen : Screen {
                     )
                 }
 
-                Card(modifier = Modifier.padding(15.dp), elevation = 10.dp) {
+                Card( modifier = Modifier.padding(horizontal = 30.dp, vertical = 10.dp),
+                    elevation = 10.dp) {
                     TextField(
                         value = password,
                         onValueChange = { password = it },
@@ -113,16 +121,31 @@ class LoginScreen : Screen {
                     "New user? Click here",
                     modifier = Modifier.padding(10.dp)
                         .clickable(onClick = { navigator.push(ScreenRouter(AllScreens.Register)) }),
-                    color = colorChangeByClick(isClicked),
+                    color = md_theme_light_secondary,
                     textDecoration = TextDecoration.Underline,
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Bold,
                 )
 
                 Button(
-                    onClick = { navigator.push(ScreenRouter(AllScreens.Profile(email)))
+                    onClick = {   val result = runBlocking {
+                       screenModel.login(email, password)
+                    }
+                        when (result) {
+                            is LoginScreenModel.LoginResult.Success -> {
+                                // Navigate to profile screen
+                                navigator.push(ScreenRouter(AllScreens.Profile(email)))
+                            }
+                            is LoginScreenModel.LoginResult.Error -> {
+                                // Show error message
+                                errorMessage = "Invalid credentials"
+                            }
+                        }
 
-                    }, modifier = Modifier.padding(10.dp),
+                    }, modifier = Modifier.padding(20.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        md_theme_dark_primary
+                    ),
 
                     enabled = !email.isEmpty() && !password.isEmpty()
                 ) {

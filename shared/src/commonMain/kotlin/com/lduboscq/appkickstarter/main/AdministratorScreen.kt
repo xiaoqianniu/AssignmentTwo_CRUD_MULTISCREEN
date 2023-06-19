@@ -35,6 +35,9 @@ import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_dark_primary
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_light_secondary
+import com.lduboscq.appkickstarter.main.ui.theme.md_theme_light_tertiaryContainer
 import com.lduboscq.appkickstarter.ui.Image
 // Renders the user interface for the administrator screen
 // and manages the state using the AdministratorScreenModel.
@@ -100,14 +103,14 @@ class AdministratorScreen : Screen {
                             )
                         },
                             modifier = Modifier.padding(10.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
+                            colors = ButtonDefaults.buttonColors(md_theme_dark_primary)) {
                             Text("GetOne")
                         }
 
                         Button(
                             onClick = { screenModel.deleteUser(userName) },
                             modifier = Modifier.padding(10.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)
+                            colors = ButtonDefaults.buttonColors(md_theme_dark_primary)
                         ) {
                             Text("delete")
                         }
@@ -115,7 +118,7 @@ class AdministratorScreen : Screen {
                         Button(onClick = {
                             screenModel.getAll()
                         }, modifier = Modifier.padding(10.dp),
-                            colors = ButtonDefaults.buttonColors(MaterialTheme.colors.secondary)) {
+                            colors = ButtonDefaults.buttonColors(md_theme_dark_primary )) {
                             Text("getAll")
                         }
                     }

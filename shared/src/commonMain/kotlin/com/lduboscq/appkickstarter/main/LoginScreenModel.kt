@@ -14,6 +14,7 @@ class LoginScreenModel(private val repository: LoginRepositoryRealm) :
 
 StateScreenModel<LoginScreenModel.State>(State.Init)
 {
+
     /**
      * Represents the possible states of the login screen.
      */
@@ -25,6 +26,10 @@ StateScreenModel<LoginScreenModel.State>(State.Init)
             class MultipleResult(val loginUserDatas: Flow<LoginUserData>?) : Result()
         }
     }
+    sealed class LoginResult {
+        object Success : LoginResult()
+        object Error : LoginResult()
+    }
 
     /**
      * Performs the login operation.
@@ -32,12 +37,17 @@ StateScreenModel<LoginScreenModel.State>(State.Init)
      * @param email The email address.
      * @param password The password.
      */
-    fun login(email: String, password: String) {
-        coroutineScope.launch {
-            mutableState.value = State.Loading
-            val loginUserData = repository.getUser(email,password)
-            mutableState.value = State.Result.SingleResult(loginUserData)
+    suspend fun login(email: String, password: String):LoginResult {
+        return if (isValidCredentials(email, password)) {
+            LoginResult.Success
+        } else {
+            LoginResult.Error
         }
     }
-
+    private fun isValidCredentials(email: String, password: String): Boolean {
+        // Replace this logic with your actual validation against the database
+        val validEmail = email
+        val validPassword = password
+        return email == validEmail && password == validPassword
+    }
 }
